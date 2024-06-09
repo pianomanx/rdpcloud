@@ -1,6 +1,6 @@
 module github.com/s77rt/rdpcloud/server/go
 
-go 1.19
+go 1.22.4
 
 replace github.com/s77rt/rdpcloud/proto/go => ../../proto/go
 
