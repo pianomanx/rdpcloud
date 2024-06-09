@@ -1,11 +1,10 @@
 VERSION := $(shell git describe --tags --always)
 
-# Set default environment variables
-SERVER_NAME ?= RAMA-RDP
-SERVER_LOCAL_IP ?= 127.0.0.1
-SERVER_PUBLIC_IP ?= 127.0.0.1
-IS_FREE_TRIAL ?= TRUE
-FREE_TRIAL_DURATION ?= 30
+export SERVER_NAME
+export SERVER_LOCAL_IP
+export SERVER_PUBLIC_IP
+export IS_FREE_TRIAL
+export FREE_TRIAL_DURATION = 30
 
 # Ensure required environment variables are set
 ifndef SERVER_NAME
