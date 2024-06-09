@@ -85,7 +85,6 @@ gen-php:
 	rm -rf proto/php && mkdir -p proto/php && touch proto/php/.keep
 	protoc --proto_path=proto/proto --php_out=proto/php --grpc_out=proto/php --plugin=protoc-gen-grpc=$(shell which grpc_php_plugin) proto/proto/**/*.proto
 
-
 build-server-go:
 	rm -rf server/go/bin && mkdir -p server/go/bin && touch server/go/bin/.keep
 	rm -rf server/go/cert && mkdir -p server/go/cert && touch server/go/cert/.keep
