@@ -56,7 +56,15 @@ gen-go:
 	# Check if proto/proto directory exists
 	@if [ ! -d "proto/proto" ]; then echo "proto/proto directory does not exist"; exit 1; fi
 	# Check if there are any .proto files in proto/proto directory
-	@if [ -z "$(wildcard proto/proto/**/*.proto)" ]; then echo "No .proto files found in proto/proto"; exit 1; fi
+	@echo "Checking for .proto files in proto/proto..."
+	@FILES=$(wildcard proto/proto/**/*.proto); \
+	if [ -z "$$FILES" ]; then \
+		echo "No .proto files found in proto/proto"; \
+		exit 1; \
+	else \
+		echo "Found .proto files:"; \
+		echo "$$FILES"; \
+	fi
 	rm -rf proto/go && mkdir -p proto/go && touch proto/go/.keep
 	cd proto/go && go mod init github.com/s77rt/rdpcloud/proto/go
 	protoc --proto_path=proto/proto --go_out=proto/go --go_opt=paths=source_relative --go-grpc_out=proto/go --go-grpc_opt=paths=source_relative proto/proto/**/*.proto
@@ -65,9 +73,18 @@ gen-php:
 	# Check if proto/proto directory exists
 	@if [ ! -d "proto/proto" ]; then echo "proto/proto directory does not exist"; exit 1; fi
 	# Check if there are any .proto files in proto/proto directory
-	@if [ -z "$(wildcard proto/proto/**/*.proto)" ]; then echo "No .proto files found in proto/proto"; exit 1; fi
+	@echo "Checking for .proto files in proto/proto..."
+	@FILES=$(wildcard proto/proto/**/*.proto); \
+	if [ -z "$$FILES" ]; then \
+		echo "No .proto files found in proto/proto"; \
+		exit 1; \
+	else \
+		echo "Found .proto files:"; \
+		echo "$$FILES"; \
+	fi
 	rm -rf proto/php && mkdir -p proto/php && touch proto/php/.keep
 	protoc --proto_path=proto/proto --php_out=proto/php --grpc_out=proto/php --plugin=protoc-gen-grpc=$(shell which grpc_php_plugin) proto/proto/**/*.proto
+
 
 build-server-go:
 	rm -rf server/go/bin && mkdir -p server/go/bin && touch server/go/bin/.keep
